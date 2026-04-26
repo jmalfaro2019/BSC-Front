@@ -1,0 +1,296 @@
+{
+  "projects": [
+    {
+      "id": "portafolio-servicios-segmentados-1",
+      "name": "Portafolio de servicios segmentados",
+      "perspective": "Perspectiva: Asociado / Cliente",
+      "actions": [
+        { "name": "Estudio a profundidad de características de asociados", "progress": 100 },
+        { "name": "Segmentación de mercado", "progress": 50 },
+        { "name": "Generación de nuevos servicios financieros", "progress": 100 }
+      ]
+    },
+    {
+      "id": "penetracion-uso-servicios",
+      "name": "Penetración de uso de servicios",
+      "perspective": "Perspectiva: Asociado / Cliente",
+      "actions": [
+        { "name": "Campañas para mayor uso del crédito por parte de asociados con capacidad de endeudamiento", "progress": 100 }
+      ]
+    },
+    {
+      "id": "desarrollo-mercado",
+      "name": "Desarrollo de mercado",
+      "perspective": "Perspectiva: Asociado / Cliente",
+      "actions": [
+        { "name": "Evaluación de agencias desde el concepto de punto de equilibrio y de pertinencia de mercado", "progress": 100 },
+        { "name": "Estudio de mercado de las agencias críticas y definición de política de crecimiento", "progress": 50 }
+      ]
+    },
+    {
+      "id": "aumento-uso-redes",
+      "name": "Aumento de usos redes y medios virtuales",
+      "perspective": "Perspectiva: Asociado / Cliente",
+      "actions": [
+        { "name": "Evaluar el uso actual de las redes y establecer plan de acción de aumento de uso efectivo", "progress": 100 },
+        { "name": "Plan de capacitación a los distintos grupos de interés", "progress": 100 },
+        { "name": "Plan de campañas de uso de redes y medios virtuales", "progress": 100 }
+      ]
+    },
+    {
+      "id": "fidelizacion-asociados",
+      "name": "Fidelización de asociados",
+      "perspective": "Perspectiva: Asociado / Cliente",
+      "actions": [
+        { "name": "Diseño de planes de comunicación con asociados y aumentos de servicios", "progress": 100 },
+        { "name": "Plan de evaluación y control permanente de satisfacción e identificación de nuevos servicios", "progress": 50 }
+      ]
+    },
+    {
+      "id": "relacionamiento-estrategico",
+      "name": "Relacionamiento estratégico",
+      "perspective": "Perspectiva: Asociado / Cliente",
+      "actions": [
+        { "name": "Evaluación del relacionamiento actual con instituciones y empresariado potencial para vinculación de asociados", "progress": 100 },
+        { "name": "Estudio de entornos empresariales y plan de comercialización a empresarios", "progress": 100 }
+      ]
+    },
+    {
+      "id": "portafolio-servicios-segmentados-2",
+      "name": "Portafolio de servicios segmentados",
+      "perspective": "Perspectiva: Asociado / Cliente — Mercadeo Social",
+      "actions": [
+        { "name": "Estudio a profundidad de características de asociados", "progress": 100 },
+        { "name": "Segmentación de mercado", "progress": 100 },
+        { "name": "Generación de nuevos servicios sociales", "progress": 50 },
+        { "name": "Plan de oferta y evaluación de los servicios sociales", "progress": 100 }
+      ]
+    },
+    {
+      "id": "lanzamiento-servicios-sociales",
+      "name": "Lanzamiento de servicios sociales",
+      "perspective": "Perspectiva: Asociado / Cliente",
+      "actions": [
+        { "name": "Plan de medios para impactar en los asociados", "progress": 100 },
+        { "name": "Establecimiento de sistema de control y reacción permanente para el uso de servicios sociales", "progress": 100 }
+      ]
+    },
+    {
+      "id": "procesos",
+      "name": "Procesos",
+      "perspective": "Perspectiva: Procesos Internos",
+      "actions": [
+        { "name": "Revisión de procesos en función de conceptos de calidad", "progress": 100 },
+        { "name": "Planes de mejora de procesos", "progress": 100 },
+        { "name": "Planes de control de resultados y ajustes", "progress": 50 }
+      ]
+    },
+    {
+      "id": "cargas",
+      "name": "Cargas",
+      "perspective": "Perspectiva: Procesos Internos",
+      "actions": [
+        { "name": "Revisión cargas laborales", "progress": 100 },
+        { "name": "Plan de ajustes a cargas laborales", "progress": 100 }
+      ]
+    },
+    {
+      "id": "cultura-calidad",
+      "name": "Cultura de la calidad",
+      "perspective": "Perspectiva: Procesos Internos",
+      "actions": [
+        { "name": "Desarrollar planes alrededor de prácticas valores", "progress": 100 },
+        { "name": "Implementación de campañas para consolidar práctica de valores", "progress": 100 },
+        { "name": "Sistemas de control de efectos de las campañas", "progress": 50 }
+      ]
+    },
+    {
+      "id": "integracion-equipos",
+      "name": "Integración de equipos",
+      "perspective": "Perspectiva: Procesos Internos",
+      "actions": [
+        { "name": "Reuniones sistemáticas entre las distintas unidades para compartir conocimiento", "progress": 100 },
+        { "name": "Plan de reuniones de integración", "progress": 100 }
+      ]
+    },
+    {
+      "id": "plan-intensidad-capacitacion",
+      "name": "Plan intensidad de capacitación",
+      "perspective": "Perspectiva: Procesos Internos",
+      "actions": [
+        { "name": "Plan de capacitación en comunicación asertiva y trabajo en equipo", "progress": 100 },
+        { "name": "Plan de continuidad en capacitación", "progress": 100 }
+      ]
+    },
+    {
+      "id": "divulgacion-1",
+      "name": "Divulgación",
+      "perspective": "Perspectiva: Procesos Internos",
+      "actions": [
+        { "name": "Plan de campañas de divulgación de servicios y mecanismos de intercomunicación con el asociado", "progress": 100 },
+        { "name": "Plan de control de campañas de divulgación", "progress": 50 }
+      ]
+    },
+    {
+      "id": "capacitacion-liderazgo",
+      "name": "Capacitación especializada en liderazgo participativo y comunicación asertiva",
+      "perspective": "Perspectiva: Procesos Internos",
+      "actions": [
+        { "name": "Plan de capacitación para líderes participativos", "progress": 100 }
+      ]
+    },
+    {
+      "id": "pesem",
+      "name": "PESEM",
+      "perspective": "Perspectiva: Aprendizaje",
+      "actions": [
+        { "name": "Implementar el nuevo PESEM en los distintos grupos de interés, con énfasis en asociados y sus familias y trabajadores", "progress": 100 },
+        { "name": "Alcance de los planes por año", "progress": 100 },
+        { "name": "Plan de control de cobertura y calidad del PESEM", "progress": 50 }
+      ]
+    },
+    {
+      "id": "educacion-financiera",
+      "name": "Educación financiera para directivos y trabajadores",
+      "perspective": "Perspectiva: Aprendizaje",
+      "actions": [
+        { "name": "Plan de capacitación sistemático y evaluación de conocimiento", "progress": 100 }
+      ]
+    },
+    {
+      "id": "economia-familiar",
+      "name": "Economía familiar para asociados y familias",
+      "perspective": "Perspectiva: Aprendizaje",
+      "actions": [
+        { "name": "Plan de capacitación para el asociado y familia", "progress": 100 },
+        { "name": "Plan de control y seguimiento a la formación", "progress": 100 }
+      ]
+    },
+    {
+      "id": "evaluacion-tecnologia",
+      "name": "Evaluación",
+      "perspective": "Perspectiva: Procesos Internos — Desarrollo Tecnológico",
+      "actions": [
+        { "name": "Diagnóstico de la tecnología con que se cuenta de cara a las necesidades coyunturales y estratégicas, así como las innovaciones del mercado (Fintech y otras)", "progress": 100 }
+      ]
+    },
+    {
+      "id": "aplicacion",
+      "name": "Aplicación",
+      "perspective": "Perspectiva: Procesos Internos — Desarrollo Tecnológico",
+      "actions": [
+        { "name": "Enfocar las aplicaciones a los productos y servicios pertinentes y proyectarlos a los años venideros", "progress": 50 }
+      ]
+    },
+    {
+      "id": "promocion-uso-tecnologia",
+      "name": "Promoción del uso de tecnología entre los asociados",
+      "perspective": "Perspectiva: Procesos Internos — Desarrollo Tecnológico",
+      "actions": [
+        { "name": "Plan de campañas para el uso de los servicios e innovaciones tecnológicas", "progress": 100 },
+        { "name": "Plan de seguimiento de uso y efectividad", "progress": 100 }
+      ]
+    },
+    {
+      "id": "participacion-asociados",
+      "name": "Participación de asociados",
+      "perspective": "Perspectiva: Procesos Internos — Empoderamiento Externo",
+      "actions": [
+        { "name": "Creación de redes multipropósitos con asociados líderes distintos a los delegados a la asamblea", "progress": 100 },
+        { "name": "Planes de capacitación en liderazgo participativo y redes sociales virtuales y reales", "progress": 100 },
+        { "name": "Precisión de los planes de la red", "progress": 50 }
+      ]
+    },
+    {
+      "id": "comites",
+      "name": "Comités",
+      "perspective": "Perspectiva: Procesos Internos — Empoderamiento Externo",
+      "actions": [
+        { "name": "Consolidación de los planes sociales y comités que los implementan", "progress": 100 },
+        { "name": "Formación a los comités sobre liderazgo, comunicación y conformación de redes", "progress": 100 }
+      ]
+    },
+    {
+      "id": "participacion-trabajadores",
+      "name": "Participación de trabajadores",
+      "perspective": "Perspectiva: Procesos Internos — Empoderamiento Interno",
+      "actions": [
+        { "name": "Creación de red multipropósitos", "progress": 100 },
+        { "name": "Planes de capacitación en liderazgo participativo y redes sociales virtuales y reales", "progress": 100 },
+        { "name": "Precisión de los planes de la red", "progress": 100 },
+        { "name": "Evaluación de clima laboral", "progress": 50 },
+        { "name": "Plan de intervención", "progress": 100 },
+        { "name": "Seguimiento a la aplicación del plan", "progress": 100 }
+      ]
+    },
+    {
+      "id": "evaluacion-beneficios",
+      "name": "Evaluación",
+      "perspective": "Perspectiva: Procesos Internos — Empoderamiento Interno",
+      "actions": [
+        { "name": "Identificación de percepciones sobre beneficios actuales de los trabajadores", "progress": 100 },
+        { "name": "Identificación de nuevos beneficios que se pueden ofrecer a los trabajadores en términos monetarios y no monetarios", "progress": 50 }
+      ]
+    },
+    {
+      "id": "divulgacion-2",
+      "name": "Divulgación",
+      "perspective": "Perspectiva: Procesos Internos — Empoderamiento Interno",
+      "actions": [
+        { "name": "Plan de comunicación de los beneficios a los trabajadores", "progress": 100 }
+      ]
+    },
+    {
+      "id": "incentivos",
+      "name": "Incentivos",
+      "perspective": "Perspectiva: Procesos Internos — Empoderamiento Interno",
+      "actions": [
+        { "name": "Revisión de nuevos incentivos (salario emocional, teletrabajo, tardes de descanso, etc)", "progress": 100 },
+        { "name": "Plan de trabajo para nuevos beneficios", "progress": 100 },
+        { "name": "Plan de control e impacto de los antiguos y nuevos beneficios", "progress": 50 }
+      ]
+    },
+    {
+      "id": "diagnostico-alianzas",
+      "name": "Diagnóstico de alianzas",
+      "perspective": "Perspectiva: Financiera",
+      "actions": [
+        { "name": "Medición de la efectividad de las alianzas estratégicas", "progress": 100 },
+        { "name": "Identificación de nuevas alianzas desde el estudio de necesidades del asociado", "progress": 100 },
+        { "name": "Implementación y seguimiento de nuevas alianzas", "progress": 50 }
+      ]
+    },
+    {
+      "id": "capacitacion-cooperativismo",
+      "name": "Capacitación en cooperativismo",
+      "perspective": "Perspectiva: Financiera",
+      "actions": [
+        { "name": "Plan de formación para las alianzas sobre el modelo cooperativa y las características de Cooindegabo", "progress": 100 }
+      ]
+    },
+    {
+      "id": "planes",
+      "name": "Planes",
+      "perspective": "Perspectiva: Aprendizaje — Responsabilidad Social",
+      "actions": [
+        { "name": "Precisión de los planes económicos, sociales y ambientales", "progress": 100 }
+      ]
+    },
+    {
+      "id": "monitoreo-seguimiento",
+      "name": "Monitoreo, seguimiento y control",
+      "perspective": "Perspectiva: Aprendizaje — Responsabilidad Social",
+      "actions": [
+        { "name": "Planes para evaluar el proceso por parte de la administración, comités y junta de vigilancia", "progress": 100 }
+      ]
+    },
+    {
+      "id": "reportes",
+      "name": "Reportes",
+      "perspective": "Perspectiva: Aprendizaje — Responsabilidad Social",
+      "actions": [
+        { "name": "Presentar el primer reporte de sostenibilidad con aplicación de algún modelo referente", "progress": 50 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "strategicLines": [
+    {
+      "id": "financiero",
+      "name": "Financiero",
+      "progress": 100,
+      "components": [
+        {"name": "Ahorros", "progress": 80},
+        {"name": "Créditos", "progress": 100},
+        {"name": "Servicios Sociales", "progress": 100},
+        {"name": "Alianzas estratégicas", "progress": 100}
+      ]
+    },
+    {
+      "id": "asociado-cliente",
+      "name": "Asociado / Cliente",
+      "progress": 100,
+      "components": [
+        {"name": "Mercado y relacionamiento", "progress": 100},
+        {"name": "Mercadeo social", "progress": 100},
+        {"name": "Comunicacion y Empoderamiento externo", "progress": 100}
+      ]
+    },
+    {
+      "id": "procesos-internos",
+      "name": "Procesos internos",
+      "progress": 100,
+      "components": [
+        {"name": "Calidad e innovación", "progress": 100},
+        {"name": "Empoderamiento interno y desarrollo tecnológico", "progress": 100}
+      ]
+    },
+    {
+      "id": "aprendizaje",
+      "name": "Aprendizaje",
+      "progress": 100,
+      "components": [
+        {"name": "Educacion integral", "progress": 100},
+        {"name": "Responsabilidad Social", "progress": 100}
+      ]
+    }
+  ]
+}
