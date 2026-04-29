@@ -5,6 +5,7 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 import StrategicLinesTab from "./pages/Dashboard/StrategicLinesTab";
 import ProjectsTab from "./pages/Dashboard/ProjectsTab";
 import ActionsTab from "./pages/Dashboard/ActionsTab";
+import DataEntryTab from "./pages/Dashboard/DataEntryTab";
 import WeightingsPage from "./pages/WeightingsPage";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
             <Route index path="/" element={<StrategicLinesTab />} />
             <Route path="/proyectos" element={<ProjectsTab />} />
             <Route path="/acciones" element={<ActionsTab />} />
+            <Route path="/ingreso-datos" element={<DataEntryTab />} />
             <Route path="/ponderaciones" element={<WeightingsPage />} />
           </Route>
 

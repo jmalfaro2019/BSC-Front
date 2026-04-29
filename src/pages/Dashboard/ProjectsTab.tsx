@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ComponentProjectsCard from "../../components/Cards/ComponentProjectsCard";
-import projectsData from "../../data/projectsData.json";
 import PageMeta from "../../components/common/PageMeta";
 import { ChevronDownIcon } from "../../icons";
+import { useBSCData, type Perspective } from "../../context/DataContext";
 
 // Internal component to manage each perspective's expanded state
-const PerspectiveSection = ({ perspective }: { perspective: any }) => {
+const PerspectiveSection = ({ perspective }: { perspective: Perspective }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const totalProjects = perspective.components.reduce(
-    (acc: number, c: any) => acc + c.projects.length,
+  const totalProjects = perspective.projects.reduce(
+    (acc: number, p) => acc + p.activities.length,
     0
   );
 
@@ -32,7 +32,7 @@ const PerspectiveSection = ({ perspective }: { perspective: any }) => {
         </h3>
         {/* Badge */}
         <span className="ml-auto shrink-0 mt-0.5 inline-flex items-center rounded-full bg-blue-500/10 px-2.5 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
-          {perspective.components.length} componente{perspective.components.length !== 1 ? "s" : ""} · {totalProjects} proyecto{totalProjects !== 1 ? "s" : ""}
+          {perspective.projects.length} proyecto{perspective.projects.length !== 1 ? "s" : ""} · {totalProjects} actividad{totalProjects !== 1 ? "es" : ""}
         </span>
       </div>
 
@@ -43,11 +43,11 @@ const PerspectiveSection = ({ perspective }: { perspective: any }) => {
         }`}
       >
         <div className="flex flex-wrap gap-4 items-stretch">
-          {perspective.components.map((component: any, idx: number) => (
+          {perspective.projects.map((project, idx) => (
             <div key={idx} className="w-fit max-w-full">
               <ComponentProjectsCard
-                name={component.name}
-                projects={component.projects}
+                name={project.name}
+                projects={project.activities}
               />
             </div>
           ))}
@@ -58,8 +58,14 @@ const PerspectiveSection = ({ perspective }: { perspective: any }) => {
 };
 
 export default function ProjectsTab() {
-  const totalProjects = projectsData.perspectives.reduce(
-    (acc, p) => acc + p.components.reduce((a, c) => a + c.projects.length, 0),
+  const { data } = useBSCData();
+
+  if (!data) {
+    return <div className="p-8 text-center text-red-500">Error cargando datos</div>;
+  }
+
+  const totalProjects = data.perspectives.reduce(
+    (acc, p) => acc + p.projects.reduce((a, proj) => a + proj.activities.length, 0),
     0
   );
 
@@ -76,12 +82,12 @@ export default function ProjectsTab() {
             Proyectos por Línea Estratégica
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {projectsData.perspectives.length} perspectivas · {totalProjects} proyectos en total
+            {data.perspectives.length} perspectivas · {totalProjects} actividades en total
           </p>
         </div>
 
         <div className="flex flex-col gap-6">
-          {projectsData.perspectives.map((perspective) => (
+          {data.perspectives.map((perspective) => (
             <PerspectiveSection key={perspective.id} perspective={perspective} />
           ))}
         </div>

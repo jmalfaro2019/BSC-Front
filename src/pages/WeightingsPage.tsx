@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import weightingsData from "../data/weightingsData.json";
+import { useState } from "react";
 import PageMeta from "../components/common/PageMeta";
 import { ChevronDownIcon } from "../icons";
+import { useBSCData, type Project } from "../context/DataContext";
 
 // ─── Color palette for strategic lines ──────────────────────────────────────
 const LINE_COLORS = [
@@ -35,7 +35,7 @@ function Cell({ value }: { value: string }) {
 }
 
 // ─── Project sub-section ─────────────────────────────────────────────────────
-function ProjectSection({ project, color }: { project: any; color: typeof LINE_COLORS[0] }) {
+function ProjectSection({ project, color }: { project: Project; color: typeof LINE_COLORS[0] }) {
   const [open, setOpen] = useState(true);
 
   return (
@@ -51,43 +51,45 @@ function ProjectSection({ project, color }: { project: any; color: typeof LINE_C
         <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 flex-1">
           {project.name}
         </span>
-        <WeightBadge value={project.weight} colorClass={color.badge} />
-        <span className="text-xs text-gray-400 dark:text-gray-500 ml-1">vs. línea</span>
+        <WeightBadge value={project.weightage} colorClass={color.badge} />
+        <span className="text-xs text-gray-400 dark:text-gray-500 ml-1">ponderación</span>
       </button>
 
-      {/* Actions table */}
+      {/* Activities table */}
       {open && (
         <div className="mt-1 overflow-x-auto rounded-xl border border-gray-100 dark:border-gray-800">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-800/60 text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
-                <th className="text-left px-4 py-2 w-[30%]">Acción</th>
-                <th className="text-center px-3 py-2 w-[6%]">Pond.</th>
-                <th className="text-left px-3 py-2 w-[22%]">Criterio / Detalle</th>
-                <th className="text-left px-3 py-2 w-[22%]">Indicadores</th>
-                <th className="text-left px-3 py-2 w-[20%]">Meta</th>
+                <th className="text-left px-4 py-2 w-[40%]">Actividad</th>
+                <th className="text-center px-3 py-2 w-[10%]">Pond.</th>
+                <th className="text-center px-3 py-2 w-[10%]">Avance</th>
+                <th className="text-left px-3 py-2 w-[20%]">Responsable</th>
+                <th className="text-left px-3 py-2 w-[20%]">Cumplimiento</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-              {project.actions.map((action: any, idx: number) => (
+              {project.activities.map((activity, idx) => (
                 <tr
                   key={idx}
                   className="bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
                 >
                   <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-medium leading-snug">
-                    {action.name}
+                    {activity.name}
                   </td>
                   <td className="px-3 py-3 text-center">
-                    <WeightBadge value={action.weight} colorClass={color.badge} />
+                    <WeightBadge value={activity.weightage} colorClass={color.badge} />
+                  </td>
+                  <td className="px-3 py-3 text-center">
+                    <span className="inline-flex items-center rounded-full bg-green-500/15 px-2 py-0.5 text-xs font-semibold text-green-700 dark:text-green-300">
+                      {activity.progress.toFixed(2)}%
+                    </span>
                   </td>
                   <td className="px-3 py-3 text-gray-600 dark:text-gray-400 leading-snug">
-                    <Cell value={action.criterion} />
+                    <Cell value={activity.responsibleProcess} />
                   </td>
                   <td className="px-3 py-3 text-gray-600 dark:text-gray-400 leading-snug">
-                    <Cell value={action.indicator} />
-                  </td>
-                  <td className="px-3 py-3 text-gray-600 dark:text-gray-400 leading-snug">
-                    <Cell value={action.goal} />
+                    <Cell value={activity.complianceDate} />
                   </td>
                 </tr>
               ))}
@@ -103,7 +105,7 @@ function ProjectSection({ project, color }: { project: any; color: typeof LINE_C
 function LineSection({ line, colorIdx }: { line: any; colorIdx: number }) {
   const [open, setOpen] = useState(true);
   const color = LINE_COLORS[colorIdx % LINE_COLORS.length];
-  const totalActions = line.projects.reduce((a: number, p: any) => a + p.actions.length, 0);
+  const totalActivities = line.projects.reduce((a: number, p: any) => a + p.activities.length, 0);
 
   return (
     <div className={`rounded-2xl border border-gray-200 dark:border-gray-700 border-l-4 ${color.border} bg-white dark:bg-gray-900 shadow-sm overflow-hidden`}>
@@ -120,12 +122,12 @@ function LineSection({ line, colorIdx }: { line: any; colorIdx: number }) {
             {line.name}
           </h3>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-            {line.projects.length} proyecto{line.projects.length !== 1 ? "s" : ""} · {totalActions} acciones
+            {line.projects.length} proyecto{line.projects.length !== 1 ? "s" : ""} · {totalActivities} actividades
           </p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <WeightBadge value={line.weight} colorClass={color.badge} />
-          <span className="text-xs text-gray-400 dark:text-gray-500">del BSC total</span>
+          <WeightBadge value={line.weightage} colorClass={color.badge} />
+          <span className="text-xs text-gray-400 dark:text-gray-500">del BSC</span>
         </div>
       </button>
 
@@ -143,11 +145,17 @@ function LineSection({ line, colorIdx }: { line: any; colorIdx: number }) {
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 export default function WeightingsPage() {
-  const totalActions = weightingsData.strategicLines.reduce(
-    (a, l) => a + l.projects.reduce((b, p) => b + p.actions.length, 0),
+  const { data } = useBSCData();
+
+  if (!data) {
+    return <div className="p-8 text-center text-red-500">Error cargando datos</div>;
+  }
+
+  const totalActivities = data.perspectives.reduce(
+    (a, l) => a + l.projects.reduce((b, p) => b + p.activities.length, 0),
     0
   );
-  const totalProjects = weightingsData.strategicLines.reduce(
+  const totalProjects = data.perspectives.reduce(
     (a, l) => a + l.projects.length,
     0
   );
@@ -156,7 +164,7 @@ export default function WeightingsPage() {
     <>
       <PageMeta
         title="Tabla de Ponderaciones | Balanced Scorecard"
-        description="Ponderación jerárquica de líneas estratégicas, proyectos y acciones"
+        description="Ponderación jerárquica de perspectivas, proyectos y actividades"
       />
 
       <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
@@ -167,11 +175,11 @@ export default function WeightingsPage() {
               Tabla de Ponderaciones
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-              Jerarquía: Línea Estratégica → Proyecto → Acción
+              Jerarquía: Perspectiva → Proyecto → Actividad
             </p>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {weightingsData.strategicLines.length} líneas · {totalProjects} proyectos · {totalActions} acciones
+            {data.perspectives.length} perspectivas · {totalProjects} proyectos · {totalActivities} actividades
           </p>
         </div>
 
@@ -179,21 +187,21 @@ export default function WeightingsPage() {
         <div className="mb-6 flex flex-wrap gap-4 text-xs text-gray-500 dark:text-gray-400">
           <span className="flex items-center gap-1.5">
             <span className="inline-block w-3 h-3 rounded-full bg-blue-500 opacity-70" />
-            Ponderación de línea = % sobre el BSC total
+            Ponderación de perspectiva = % sobre el BSC total
           </span>
           <span className="flex items-center gap-1.5">
             <span className="inline-block w-3 h-3 rounded-full bg-gray-400 opacity-70" />
-            Ponderación de proyecto = % dentro de su línea
+            Ponderación de proyecto = % dentro de su perspectiva
           </span>
           <span className="flex items-center gap-1.5">
             <span className="inline-block w-3 h-3 rounded-full bg-gray-300 opacity-70" />
-            Ponderación de acción = % dentro de su proyecto
+            Ponderación de actividad = % dentro de su proyecto
           </span>
         </div>
 
         {/* Strategic lines */}
         <div className="flex flex-col gap-5">
-          {weightingsData.strategicLines.map((line, idx) => (
+          {data.perspectives.map((line, idx) => (
             <LineSection key={line.id} line={line} colorIdx={idx} />
           ))}
         </div>

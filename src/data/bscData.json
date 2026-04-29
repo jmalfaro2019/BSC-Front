@@ -1,0 +1,621 @@
+{
+  "perspectives": [
+    {
+      "id": "financiero",
+      "name": "FINANCIERO",
+      "objective": "Armonizar rentabilidad económica",
+      "weightage": 10,
+      "projects": [
+        {
+          "id": "fin-credito",
+          "name": "Crédito",
+          "weightage": 2.5,
+          "strategy": "Plan de colocación sostenible contemplando ciclos y experiencias anteriores",
+          "detail": "Documento de registro de planes de colocación contemplando estrategias por temporadas.",
+          "activities": [
+            {
+              "id": "fin-credito-act-1",
+              "name": "Generación de estrategias",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "FINANCIERO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": "Se estan desarrollando estrategias de colocación conjuntamente las unidades de Crédito y Mercadeo"
+            }
+          ]
+        },
+        {
+          "id": "fin-ahorro",
+          "name": "Ahorro",
+          "weightage": 2.5,
+          "strategy": "Oferta competitiva y variedad de captación",
+          "detail": "Documento de registro de planes de captación contemplando estrategias por temporadas.",
+          "activities": [
+            {
+              "id": "fin-ahorro-act-1",
+              "name": "Generación de estrategias",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "FINANCIERO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": "Se estan desarrollando estrategias de captación conjuntamente las unidades de Ahorros y Mercadeo"
+            }
+          ]
+        },
+        {
+          "id": "fin-cartera",
+          "name": "Cartera",
+          "weightage": 2.5,
+          "strategy": "Disminución sostenida del indicador de cartera vencida",
+          "detail": "Documento de plan para disminuir indicador de cartera vencida",
+          "activities": [
+            {
+              "id": "fin-cartera-act-1",
+              "name": "Generación de estrategias",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "FINANCIERO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": "Se estan desarrollando estrategias de Recuperación de cartera vencida conjuntamente en las unidades de Jurídico y Cartera"
+            }
+          ]
+        },
+        {
+          "id": "fin-costo-operativo",
+          "name": "Efectividad del costo operativo",
+          "weightage": 2.5,
+          "strategy": "Disminución de los costos implícitos de la operación financiera",
+          "detail": "Documento de estrategias de disminución de costo.",
+          "activities": [
+            {
+              "id": "fin-costo-operativo-act-1",
+              "name": "Generación de estrategias",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "FINANCIERO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": "Se estan aplicando ahorros en costos de compras, contratación de personal y contratos con proveedores"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asociados-social-comercial",
+      "name": "ASOCIADOS, SOCIAL Y COMERCIAL",
+      "objective": "Satisfacer necesidades integrales del asociado y su familia",
+      "weightage": 32.5,
+      "projects": [
+        {
+          "id": "asc-transferencia-solidaria",
+          "name": "Efectividad de la transferencia solidaria",
+          "weightage": 2.5,
+          "strategy": "Generar una transferencia solidaria progresiva",
+          "detail": "Valoración de la transferencia semestral",
+          "activities": [
+            {
+              "id": "asc-transferencia-solidaria-act-1",
+              "name": "Registro de transferencia",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "FINANCIERO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": "Se esta efectuando la valoración de la transferencia solidaria a los asociados, de forma progresiva con informes mensuales a la Gerencia."
+            }
+          ]
+        },
+        {
+          "id": "asc-servicios-sociales",
+          "name": "Plan de servicios sociales segmentado",
+          "weightage": 2.5,
+          "strategy": "Generar mayor cobertura de uso de servicios y productos",
+          "detail": "Definición de plan comercial de servicios sociales",
+          "activities": [
+            {
+              "id": "asc-servicios-sociales-act-1",
+              "name": "Ejecución del plan comercial",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "COMITÉS SOCIALES UNIDAD DE MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-base-social",
+          "name": "Aumento base social",
+          "weightage": 2.5,
+          "strategy": "Incrementar la base social (asociados nuevos y fidelizar actuales) para el fortalecimiento de la cooperativa.",
+          "detail": "Precisar crecimiento mensualmente (Estrategia de vinculación y de fidelización), comprometer a tres puntos de servicio con una prueba piloto comercial",
+          "activities": [
+            {
+              "id": "asc-base-social-act-1",
+              "name": "Identificación de Nichos de Mercado (encuesta)",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO Y COORDINACIÓN DE PUNTOS DE SERVICIO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-base-social-act-2",
+              "name": "Diseño de Ofertas de Valor Atractivas de productos y servicios",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO Y COORDINACIÓN DE PUNTOS DE SERVICIO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-base-social-act-3",
+              "name": "Programas de Recompensas y Reconocimiento",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO Y COORDINACIÓN DE PUNTOS DE SERVICIO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-pesem",
+          "name": "PESEM",
+          "weightage": 2.5,
+          "strategy": "Desarrollo del PESEM - énfasis en educación financiera y RSE",
+          "detail": "Cantidad de eventos en todo el país",
+          "activities": [
+            {
+              "id": "asc-pesem-act-1",
+              "name": "Eventos realizados con énfasis en educación financiera y RSE",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "COMITÉ DE EDUCACIÓN",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-plan-comercial-puntos",
+          "name": "Plan comercial de servicios financieros y sociales por punto de servicio",
+          "weightage": 2.5,
+          "strategy": "Proyectar un modelo comercial en cada punto de servicio.",
+          "detail": "Presupuesto por punto de servicio con planes comerciales definidos según su entorno y características.",
+          "activities": [
+            {
+              "id": "asc-plan-comercial-puntos-act-1",
+              "name": "Capacitación Especializada \"Embajadores de Cooptraiss\"",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "UNIDADES DE MERCADEO, AHORRO, CRÉDITO Y COORDINACIÓN PUNTOS DE SERVICIO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-plan-comercial-puntos-act-2",
+              "name": "Incentivos y Metas Claras para los Puntos de Atención Piloto",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "UNIDADES DE MERCADEO, AHORRO, CRÉDITO Y COORDINACIÓN PUNTOS DE SERVICIO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-plan-comercial-puntos-act-3",
+              "name": "Desarrollo e implementación de Estrategias de Mercadeo Localizadas",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "UNIDADES DE MERCADEO, AHORRO, CRÉDITO Y COORDINACIÓN PUNTOS DE SERVICIO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-plan-comercial-puntos-act-4",
+              "name": "Capacitación y Empoderamiento del Personal del Punto de Servicio en el plan comercial",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "UNIDADES DE MERCADEO, AHORRO, CRÉDITO Y COORDINACIÓN PUNTOS DE SERVICIO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-plan-comercial-puntos-act-5",
+              "name": "Seguimiento de las Estrategias de Mercadeo",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "UNIDADES DE MERCADEO, AHORRO, CRÉDITO Y COORDINACIÓN PUNTOS DE SERVICIO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-excelencia-servicio",
+          "name": "Aumentar percepción de excelencia en el servicio",
+          "weightage": 2.5,
+          "strategy": "Generar satisfaccion a los asociados",
+          "detail": "Evaluación de percepción de asociado incorporando observaciones de servicios y necesidades",
+          "activities": [
+            {
+              "id": "asc-excelencia-servicio-act-1",
+              "name": "Comunicación Estratégica del Valor y Mejora del Servicio",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-excelencia-servicio-act-2",
+              "name": "Medición Continua del Índice de Satisfacción y Ciclo de Mejora",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": "La percepción sobre la satisfacción de los asociados en lo referente a los servicios y productos misionales y las PQRSF se estan midiendo a través de encuestas de satisfacción e indicadores de gestión de forma mensual."
+            }
+          ]
+        },
+        {
+          "id": "asc-portafolio-calidad-vida",
+          "name": "Portafolio de servicios para aumentar calidad de vida del asociado",
+          "weightage": 2.5,
+          "strategy": "Oferta de un portafolio dinamico de productos y servicios direccionado a los momentos de vida de los asociados",
+          "detail": "Plan de generación de nuevos productos. Revisar presupuesto de lanzamiento",
+          "activities": [
+            {
+              "id": "asc-portafolio-calidad-vida-act-1",
+              "name": "Investigación y Segmentación por \"Momentos de Vida\"",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-portafolio-calidad-vida-act-2",
+              "name": "Ideación y Diseño de Nuevos Productos y Servicios",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-portafolio-calidad-vida-act-3",
+              "name": "Priorización y Plan de Lanzamiento",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-portafolio-calidad-vida-act-4",
+              "name": "Comunicación y Promoción Estratégica",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-necesidades-integrales",
+          "name": "Reconocer necesidades integrales del asociado y su familia",
+          "weightage": 2.5,
+          "strategy": "Reconocer las necesidades y expectativas de los asociados segmentando y generando servicios enfocados",
+          "detail": "Estudio de necesidades y expectativas de los asociados",
+          "activities": [
+            {
+              "id": "asc-necesidades-integrales-act-1",
+              "name": "Diseño e Implementación de un Sistema Integral de Escucha del Asociado",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-necesidades-integrales-act-2",
+              "name": "Transformación de Insights en Propuestas de Valor Personalizadas",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "asc-necesidades-integrales-act-3",
+              "name": "Comunicación Estratégica del Valor y Mejora del Servicio",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-sentido-comercial",
+          "name": "Aumentar el sentido comercial de directores de puntos de servicio",
+          "weightage": 2.5,
+          "strategy": "Establecer la estructura comercial focalizada en las necesidades de los puntos de servicio.",
+          "detail": "Capacitación y definición de plan y compromisos",
+          "activities": [
+            {
+              "id": "asc-sentido-comercial-act-1",
+              "name": "Ejecución del plan comercial",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "TALENTO HUMANO - MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-empoderamiento-asociados",
+          "name": "Aumentar el empoderamiento de los asociados",
+          "weightage": 2.5,
+          "strategy": "Consolidación red de asociados (subcomité de juventudes)",
+          "detail": "Definición del plan del subcomité de juventudes",
+          "activities": [
+            {
+              "id": "asc-empoderamiento-asociados-act-1",
+              "name": "Ejecución del plan del subcomité de juventudes",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "COMITÉ DE INNOVACIÓN",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": "Se estan desarrollando actividades en los tres subcomités de juventudes a nivel nacional"
+            }
+          ]
+        },
+        {
+          "id": "asc-emprendimiento",
+          "name": "Proyecto de emprendimiento",
+          "weightage": 2.5,
+          "strategy": "Consolidación de proyectos de asociados",
+          "detail": "Definición de plan de apoyo (actividades puntuales). Rueda de negocios y feria empresarial.",
+          "activities": [
+            {
+              "id": "asc-emprendimiento-act-1",
+              "name": "Actividades del plan de apoyo",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "SERVICIOS ADMINISTRATIVOS",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-intercooperacion",
+          "name": "Proyecto de intercooperación",
+          "weightage": 2.5,
+          "strategy": "Consolidación de proyectos de las líneas de acción",
+          "detail": "Definir presupuestos en participacion de las líneas de innovación, conocimiento compartido, tecnologia, educación y emprendimiento.",
+          "activities": [
+            {
+              "id": "asc-intercooperacion-act-1",
+              "name": "Presupuesto",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "COMITÉ DE INNOVACIÓN - CALIDAD",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "asc-tecnologia",
+          "name": "Proyecto de tecnología",
+          "weightage": 2.5,
+          "strategy": "Nuevos canales de comercializacion (Inficredit - Instantt)",
+          "detail": "Revisión de nuevos canales digitales con aplicativos de IA y fintech, desarrollo de nuevas estrategias tecnológicas.",
+          "activities": [
+            {
+              "id": "asc-tecnologia-act-1",
+              "name": "Implementación de nuevas estrategias",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "TECNOLOGÍA, MERCADEO Y COMUNICACIONES",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "procesos-internos",
+      "name": "PROCESOS INTERNOS",
+      "objective": "Fortalecer los procesos tecnológicos, comerciales, administrativos y financieros.",
+      "weightage": 12.5,
+      "projects": [
+        {
+          "id": "pi-escuela-digital",
+          "name": "Escuela digital",
+          "weightage": 2.5,
+          "strategy": "Implementación de procesos de aprendizaje del asociado adulto mayor",
+          "detail": "Establecer un plan de capacitación a nivel nacional.",
+          "activities": [
+            {
+              "id": "pi-escuela-digital-act-1",
+              "name": "Ejecución del plan",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "COMITÉ DE INNOVACIÓN, SUBCOMITÉ DE JUVENTUDES",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "pi-virtualizacion",
+          "name": "Virtualización",
+          "weightage": 2.5,
+          "strategy": "Virtualización de los procesos de comunicación basados en las nuevas tecnologías (SAGIC)",
+          "detail": "Plan de virtualización de procesos estratégicos",
+          "activities": [
+            {
+              "id": "pi-virtualizacion-act-1",
+              "name": "Virtualización de procesos",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "TECNOLOGÍA Y MERCADEO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "pi-procesos-excelencia",
+          "name": "Procesos de excelencia",
+          "weightage": 2.5,
+          "strategy": "Modelo eficiente operativo y de servicio",
+          "detail": "Valoración de procesos",
+          "activities": [
+            {
+              "id": "pi-procesos-excelencia-act-1",
+              "name": "Mejoramiento de procesos",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "CALIDAD",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": "Se estan evaluando los procedimientos de crédito, para aplicar conceptos de reingeniería de procesos"
+            }
+          ]
+        },
+        {
+          "id": "pi-plan-medios",
+          "name": "Plan de medios (internos y externos)",
+          "weightage": 2.5,
+          "strategy": "Intensificar comunicación en las herramientas actuales y revisar nuevos formatos (Revista digital) Intranet",
+          "detail": "Plan de comunicación interna y externa (considerar los puntos de servicio)",
+          "activities": [
+            {
+              "id": "pi-plan-medios-act-1",
+              "name": "Implementación de nuevos formatos de comunicación",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "COMUNICACIONES Y TECNOLOGÍA",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "pi-inteligencia-artificial",
+          "name": "Inteligencia artificial",
+          "weightage": 2.5,
+          "strategy": "Implementación de herramientas de IA en procesos",
+          "detail": "Plan de implementación de IA",
+          "activities": [
+            {
+              "id": "pi-inteligencia-artificial-act-1",
+              "name": "Implementación de herramientas de IA",
+              "weightage": 2.5,
+              "progress": 100.0,
+              "responsibleProcess": "TECNOLOGÍA",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aprendizaje",
+      "name": "CONOCIMIENTO Y APRENDIZAJE",
+      "objective": "Fortalecer el capital humano y la cultura organizacional",
+      "weightage": 45,
+      "projects": [
+        {
+          "id": "ca-ubuntu",
+          "name": "Ubuntu - todos por el mismo propósito",
+          "weightage": 15.0,
+          "strategy": "Consolidación de valores cooperativos",
+          "detail": "Plan de capacitación en valores y principios cooperativos",
+          "activities": [
+            {
+              "id": "ca-ubuntu-act-1",
+              "name": "Capacitación en trabajo en equipo, con enfasis en unos de los valores cooperativos \"Ayuda Mutua\".",
+              "weightage": 5.0,
+              "progress": 100.0,
+              "responsibleProcess": "TALENTO HUMANO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "ca-ubuntu-act-2",
+              "name": "Medición de clima laboral a través de un instrumento estandarizado para medición de clima.",
+              "weightage": 5.0,
+              "progress": 100.0,
+              "responsibleProcess": "TALENTO HUMANO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "ca-ubuntu-act-3",
+              "name": "Enfasis en los valores y principios cooperativos en el proceso de inducción a los trabajadores que ingresan a Cooptraiss. Proyectar otras actividades, ejercicios con trabajadores antiguos.",
+              "weightage": 5.0,
+              "progress": 100.0,
+              "responsibleProcess": "TALENTO HUMANO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "ca-capital-humano",
+          "name": "Capital humano",
+          "weightage": 15.0,
+          "strategy": "Desarrollo profesional y especialización",
+          "detail": "Plan de capacitación especializada",
+          "activities": [
+            {
+              "id": "ca-capital-humano-act-1",
+              "name": "Desarrollo de focus group con profesionales de distintas disciplinas (CONTADORES, ABOGADOS...)",
+              "weightage": 7.5,
+              "progress": 100.0,
+              "responsibleProcess": "TALENTO HUMANO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            },
+            {
+              "id": "ca-capital-humano-act-2",
+              "name": "Plan de acción de profesionales",
+              "weightage": 7.5,
+              "progress": 100.0,
+              "responsibleProcess": "TALENTO HUMANO",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        },
+        {
+          "id": "ca-cultura-calidad",
+          "name": "Cultura de calidad y solidaria",
+          "weightage": 15.0,
+          "strategy": "Implementación de cultura de calidad",
+          "detail": "Plan de actividades de calidad",
+          "activities": [
+            {
+              "id": "ca-cultura-calidad-act-1",
+              "name": "Actividades desarrolladas de acuerdo al plan",
+              "weightage": 15.0,
+              "progress": 100.0,
+              "responsibleProcess": "CALIDAD",
+              "complianceDate": "Segundo semestre 2025",
+              "realizedActivities": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

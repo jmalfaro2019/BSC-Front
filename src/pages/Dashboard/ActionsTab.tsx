@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ActionCard from "../../components/Cards/ActionCard";
-import actionsData from "../../data/actionsData.json";
 import PageMeta from "../../components/common/PageMeta";
 import { ChevronDownIcon } from "../../icons";
+import { useBSCData, type Project } from "../../context/DataContext";
 
 // Internal component to manage each project section's expanded state
-const ProjectSection = ({ project }: { project: any }) => {
+const ProjectSection = ({
+  project,
+  perspectiveName,
+}: {
+  project: Project;
+  perspectiveName: string;
+}) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
@@ -27,12 +33,12 @@ const ProjectSection = ({ project }: { project: any }) => {
             {project.name}
           </h3>
           <span className="text-xs font-medium text-gray-400 dark:text-gray-500 mt-0.5">
-            {project.perspective}
+            {perspectiveName}
           </span>
         </div>
-        {/* Action count badge */}
+        {/* Activity count badge */}
         <span className="ml-auto shrink-0 mt-0.5 inline-flex items-center rounded-full bg-blue-500/10 px-2.5 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
-          {project.actions.length} acción{project.actions.length !== 1 ? "es" : ""}
+          {project.activities.length} actividad{project.activities.length !== 1 ? "es" : ""}
         </span>
       </div>
 
@@ -43,11 +49,11 @@ const ProjectSection = ({ project }: { project: any }) => {
         }`}
       >
         <div className="flex flex-wrap gap-4">
-          {project.actions.map((action: any, idx: number) => (
+          {project.activities.map((activity, idx) => (
             <ActionCard
               key={idx}
-              name={action.name}
-              progress={action.progress}
+              name={activity.name}
+              progress={activity.progress}
             />
           ))}
         </div>
@@ -57,6 +63,25 @@ const ProjectSection = ({ project }: { project: any }) => {
 };
 
 export default function ActionsTab() {
+  const { data } = useBSCData();
+
+  if (!data) {
+    return <div className="p-8 text-center text-red-500">Error cargando datos</div>;
+  }
+
+  // Flatten all projects with their perspective info
+  const allProjects = data.perspectives.flatMap((perspective) =>
+    perspective.projects.map((project) => ({
+      project,
+      perspectiveName: perspective.name,
+    }))
+  );
+
+  const totalActivities = data.perspectives.reduce(
+    (acc, p) => acc + p.projects.reduce((a, proj) => a + proj.activities.length, 0),
+    0
+  );
+
   return (
     <>
       <PageMeta
@@ -70,18 +95,17 @@ export default function ActionsTab() {
             Acciones por Proyecto
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {actionsData.projects.length} proyectos ·{" "}
-            {actionsData.projects.reduce(
-              (acc, p) => acc + p.actions.length,
-              0
-            )}{" "}
-            acciones en total
+            {allProjects.length} proyectos · {totalActivities} actividades en total
           </p>
         </div>
 
         <div className="flex flex-col gap-6">
-          {actionsData.projects.map((project) => (
-            <ProjectSection key={project.id} project={project} />
+          {allProjects.map(({ project, perspectiveName }) => (
+            <ProjectSection
+              key={project.id}
+              project={project}
+              perspectiveName={perspectiveName}
+            />
           ))}
         </div>
       </div>

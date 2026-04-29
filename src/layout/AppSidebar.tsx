@@ -43,6 +43,11 @@ const othersItems: NavItem[] = [
     name: "Tabla de Ponderaciones",
     path: "/ponderaciones",
   },
+  {
+    icon: <BoxCubeIcon />,
+    name: "Ingreso de Datos",
+    path: "/ingreso-datos",
+  },
 ];
 
 const AppSidebar: React.FC = () => {
