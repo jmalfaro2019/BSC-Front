@@ -11,15 +11,24 @@ interface ComponentProjectsCardProps {
 }
 
 function getBarColors(progress: number) {
-  if (progress === 100) {
+  if (progress >= 80) {
     return {
+      badge: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
       bar: "bg-emerald-500",
       pct: "text-emerald-600 dark:text-emerald-400",
     };
   }
+  else if (progress >= 50){
+    return {
+      badge: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+      bar: "bg-amber-500",
+      pct: "text-amber-600 dark:text-amber-400",
+    }
+  }
   return {
-    bar: "bg-amber-500",
-    pct: "text-amber-600 dark:text-amber-400",
+    badge: "bg-red-500/10 text-red-600 dark:text-red-400",
+    bar: "bg-red-500",
+    pct: "text-red-600 dark:text-red-400",
   };
 }
 

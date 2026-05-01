@@ -4,6 +4,33 @@ interface ActionCardProps {
   name: string;
   progress: number;
 }
+function getProgressColors(progress: number) {
+  if (progress >= 80) {
+    return {
+      badge: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+      bar: "bg-emerald-500",
+      pct: "text-emerald-600 dark:text-emerald-400",
+      ring: "stroke-emerald-500 dark:stroke-emerald-400",
+      text: "fill-emerald-600 dark:fill-emerald-400",
+    };
+  } else if (progress >= 50) {
+    return {
+      badge: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+      bar: "bg-amber-500",
+      pct: "text-amber-600 dark:text-amber-400",
+      ring: "stroke-amber-500 dark:stroke-amber-400",
+      text: "fill-amber-600 dark:fill-amber-400",
+    };
+  }
+  return {
+    badge: "bg-red-500/10 text-red-600 dark:text-red-400",
+    bar: "bg-red-500",
+    pct: "text-red-600 dark:text-red-400",
+    ring: "stroke-red-500 dark:stroke-red-400",
+    text: "fill-red-600 dark:fill-red-400",
+  };
+}
+
 
 export default function ActionCard({ name, progress }: ActionCardProps) {
   const radius = 38;
@@ -12,13 +39,9 @@ export default function ActionCard({ name, progress }: ActionCardProps) {
   const circumference = 2 * Math.PI * normalizedRadius;
   const offset = circumference - (progress / 100) * circumference;
 
-  const isComplete = progress === 100;
-  const ringColor = isComplete
-    ? "stroke-emerald-500 dark:stroke-emerald-400"
-    : "stroke-amber-500 dark:stroke-amber-400";
-  const textColor = isComplete
-    ? "fill-emerald-600 dark:fill-emerald-400"
-    : "fill-amber-600 dark:fill-amber-400";
+  const colors = getProgressColors(progress);
+  const ringColor = colors.ring;
+  const textColor = colors.text;
 
   return (
     <div
