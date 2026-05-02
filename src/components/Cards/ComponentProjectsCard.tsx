@@ -1,4 +1,4 @@
-import React from "react";
+import { getPerspectiveColors, getProgressColor } from "../../utils/perspectiveColors";
 
 interface ProjectItem {
   name: string;
@@ -8,68 +8,42 @@ interface ProjectItem {
 interface ComponentProjectsCardProps {
   name: string;
   projects: ProjectItem[];
+  perspectiveId?: string;
 }
 
-function getBarColors(progress: number) {
-  if (progress >= 80) {
-    return {
-      badge: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-      bar: "bg-emerald-500",
-      pct: "text-emerald-600 dark:text-emerald-400",
-    };
-  }
-  else if (progress >= 50){
-    return {
-      badge: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-      bar: "bg-amber-500",
-      pct: "text-amber-600 dark:text-amber-400",
-    }
-  }
-  return {
-    badge: "bg-red-500/10 text-red-600 dark:text-red-400",
-    bar: "bg-red-500",
-    pct: "text-red-600 dark:text-red-400",
-  };
-}
+export default function ComponentProjectsCard({ name, projects, perspectiveId }: ComponentProjectsCardProps) {
+  const pColors = perspectiveId ? getPerspectiveColors(perspectiveId) : null;
 
-export default function ComponentProjectsCard({ name, projects }: ComponentProjectsCardProps) {
   return (
-    <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-5 shadow-sm h-full flex flex-col hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
-      {/* Card header */}
-      <div className="border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
-        <h4 className="text-base font-bold text-black dark:text-white leading-snug">
+    <div className="rounded-xl overflow-hidden border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900 flex flex-col transition-shadow duration-300 hover:shadow-lg min-w-[320px]">
+      {pColors && (
+        <div className={`h-1 w-full ${pColors.bar}`} />
+      )}
+      <div className="p-5 flex flex-col flex-1">
+        <h4 className="text-sm font-bold text-gray-900 dark:text-white leading-snug mb-4">
           {name}
         </h4>
-      </div>
 
-      <div className="flex-1 flex flex-col justify-end">
-        {/* Vertical bar chart */}
-        <div className="flex items-start justify-start gap-10 w-full mt-auto overflow-x-auto no-scrollbar pb-2 pt-6">
+        <div className="flex-1 flex flex-col gap-2.5">
           {projects.map((proj, idx) => {
-            const c = getBarColors(proj.progress);
+            const c = getProgressColor(proj.progress);
             return (
               <div
                 key={idx}
-                className="flex flex-col items-center w-[72px] shrink-0 group relative"
+                className="flex items-center gap-3 group"
                 title={`${proj.name}: ${proj.progress}%`}
               >
-                {/* Bar track */}
-                <div className="w-10 bg-transparent rounded-t-md h-32 flex flex-col justify-end relative mt-2">
-                  {/* Filled bar */}
-                  <div
-                    className={`w-full ${c.bar} rounded-t-md transition-all duration-500 ease-out relative`}
-                    style={{ height: `${proj.progress}%` }}
-                  >
-                    {/* Percentage anchored to top of bar */}
-                    <span className={`absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold ${c.pct}`}>
-                      {proj.progress}%
-                    </span>
-                  </div>
-                </div>
-
-                {/* Label */}
-                <span className="text-xs text-center mt-2 text-gray-600 dark:text-gray-300 font-medium leading-tight w-full break-normal">
+                <span className="text-sm text-gray-600 dark:text-gray-400 leading-snug min-w-0 flex-1 line-clamp-2">
                   {proj.name}
+                </span>
+                <div className="w-28 shrink-0 h-1.5 rounded-full bg-gray-100 dark:bg-gray-800">
+                  <div
+                    className={`${c.bar} h-1.5 rounded-full transition-all duration-700 ease-out`}
+                    style={{ width: `${proj.progress}%` }}
+                  />
+                </div>
+                <span className={`shrink-0 w-10 text-right text-sm font-semibold tabular-nums ${c.text}`}>
+                  {proj.progress}%
                 </span>
               </div>
             );

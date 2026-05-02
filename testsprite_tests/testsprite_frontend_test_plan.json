@@ -1,0 +1,945 @@
+[
+  {
+    "id": "TC001",
+    "title": "Sign in and reach the dashboard",
+    "description": "Verifies a user can sign in with valid credentials and is taken to the Strategic Lines Dashboard where core BSC data is displayed.",
+    "category": "User Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user lands on the dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify perspectives are displayed with progress information"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Update an activity progress via data entry and see it reflected in Actions and Weightings",
+    "description": "Verifies a user can update an activity progress from the data-entry page and then observe the updated progress reflected in Actions and Weightings views.",
+    "category": "Data Entry - Update Activity Progress",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the data entry view"
+      },
+      {
+        "type": "action",
+        "description": "Select a perspective from the perspective dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Select a project from the project dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Select an activity from the activity dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Adjust the progress slider to a new value"
+      },
+      {
+        "type": "action",
+        "description": "Submit the progress update"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success confirmation is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the actions view"
+      },
+      {
+        "type": "action",
+        "description": "Expand the project section corresponding to the selection"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the selected activity shows the updated progress value"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the weightings table view"
+      },
+      {
+        "type": "action",
+        "description": "Expand the perspective section corresponding to the selection"
+      },
+      {
+        "type": "action",
+        "description": "Expand the project section corresponding to the selection"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the selected activity shows the updated progress value"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "View perspectives progress and KPI summary on dashboard",
+    "description": "Verifies the dashboard renders the perspectives list with weighted progress and the KPI summary tiles after authentication.",
+    "category": "Strategic Lines Dashboard",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a KPI summary section is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a list of perspectives with progress bars is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "View activities grouped by project and inspect progress/responsibles",
+    "description": "Verifies an authenticated user can open the Actions view and see activities grouped by project with progress statuses and responsible information displayed.",
+    "category": "Actions View",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the actions view"
+      },
+      {
+        "type": "action",
+        "description": "Expand a project section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify activities are displayed for the expanded project including progress status information"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify responsible information is displayed for at least one activity"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "View weightings hierarchy and inspect weight and progress indicators",
+    "description": "Verifies an authenticated user can open the Weightings table, expand perspective and project levels, and see weight badges and progress indicators for activities.",
+    "category": "Weightings Table",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the weightings table view"
+      },
+      {
+        "type": "action",
+        "description": "Expand a perspective section"
+      },
+      {
+        "type": "action",
+        "description": "Expand a project section within that perspective"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify activities are displayed with weight information"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify progress indicators are displayed for activities"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Browse projects grouped by perspective",
+    "description": "Verifies an authenticated user can navigate to Projects and view projects grouped under perspectives with project progress/details visible.",
+    "category": "Projects View",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation option to open the Projects view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify projects are displayed grouped by perspective"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify project progress/details are visible for at least one project"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Cascading selects enablement from perspective to project to activity",
+    "description": "Verifies that selecting a perspective enables project selection and selecting a project enables activity selection.",
+    "category": "Data Entry - Update Activity Progress",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the data entry view"
+      },
+      {
+        "type": "action",
+        "description": "Select a perspective from the perspective dropdown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the project dropdown is enabled and available for selection"
+      },
+      {
+        "type": "action",
+        "description": "Select a project from the project dropdown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the activity dropdown is enabled and available for selection"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC008",
+    "title": "Expand and collapse perspective sections in Projects view",
+    "description": "Verifies a user can expand and collapse perspective sections to explore contained projects and the section content updates accordingly.",
+    "category": "Projects View",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation option to open the Projects view"
+      },
+      {
+        "type": "action",
+        "description": "Expand a perspective section"
+      },
+      {
+        "type": "action",
+        "description": "Collapse the same perspective section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the projects list within that perspective is hidden after collapsing"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC009",
+    "title": "Expand and collapse a project section to show and hide its activities",
+    "description": "Verifies the user can expand a project section to reveal activities and then collapse it to hide them again.",
+    "category": "Actions View",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the actions view"
+      },
+      {
+        "type": "action",
+        "description": "Expand a project section"
+      },
+      {
+        "type": "action",
+        "description": "Collapse the same project section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the activities list for that project section is not displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC010",
+    "title": "View actions across perspectives without expanding any project",
+    "description": "Verifies the Actions view loads successfully and presents a list of project sections without requiring any expansions.",
+    "category": "Actions View",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the actions view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify project sections are displayed in the actions view"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC011",
+    "title": "Collapse expanded weightings sections to return to a higher-level view",
+    "description": "Verifies the user can collapse expanded perspective and project sections in the Weightings table to hide underlying rows.",
+    "category": "Weightings Table",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the weightings table view"
+      },
+      {
+        "type": "action",
+        "description": "Expand a perspective section"
+      },
+      {
+        "type": "action",
+        "description": "Expand a project section within that perspective"
+      },
+      {
+        "type": "action",
+        "description": "Collapse the project section"
+      },
+      {
+        "type": "action",
+        "description": "Collapse the perspective section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify no activity rows are displayed for the collapsed perspective section"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC012",
+    "title": "Validate required selections when submitting without project or activity",
+    "description": "Verifies submitting an update after selecting only a perspective shows a validation error indicating required selections are missing.",
+    "category": "Data Entry - Update Activity Progress",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the data entry view"
+      },
+      {
+        "type": "action",
+        "description": "Select a perspective from the perspective dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Submit the progress update"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a validation error is visible indicating required selections are missing"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC013",
+    "title": "Auto-scroll to an expanded project section",
+    "description": "Verifies that expanding a project section scrolls the view so the expanded section is brought into view.",
+    "category": "Actions View",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the actions view"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down until multiple project sections are out of view above the fold"
+      },
+      {
+        "type": "action",
+        "description": "Expand a project section that is partially off-screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the expanded project section is brought into view"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC014",
+    "title": "Expand two different project sections and inspect both activity lists",
+    "description": "Verifies the user can expand multiple project sections and see activities for each expanded section.",
+    "category": "Actions View",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the actions view"
+      },
+      {
+        "type": "action",
+        "description": "Expand a first project section"
+      },
+      {
+        "type": "action",
+        "description": "Expand a second project section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify activities are displayed for both expanded project sections"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC015",
+    "title": "Expand multiple perspectives in the weightings table",
+    "description": "Verifies the user can expand more than one perspective section to inspect multiple hierarchies within the table.",
+    "category": "Weightings Table",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the weightings table view"
+      },
+      {
+        "type": "action",
+        "description": "Expand a first perspective section"
+      },
+      {
+        "type": "action",
+        "description": "Expand a second perspective section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify project rows are displayed under both expanded perspective sections"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC016",
+    "title": "Set progress slider to boundary values",
+    "description": "Verifies the progress slider can be set to the minimum and maximum values and the UI reflects those values.",
+    "category": "Data Entry - Update Activity Progress",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to open the data entry view"
+      },
+      {
+        "type": "action",
+        "description": "Select a perspective from the perspective dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Select a project from the project dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Select an activity from the activity dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Adjust the progress slider to 0"
+      },
+      {
+        "type": "action",
+        "description": "Adjust the progress slider to 100"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the progress value shown corresponds to the maximum slider value"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC017",
+    "title": "Toggle theme to dark and back on dashboard",
+    "description": "Verifies an authenticated user can switch the dashboard theme to dark mode and then back to light mode with the UI updating accordingly.",
+    "category": "Dark Mode Toggle",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button in the header"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button in the header"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page is displayed in light mode"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC018",
+    "title": "Show invalid credentials error",
+    "description": "Verifies submitting invalid credentials keeps the user on the sign-in experience and shows an authentication error message.",
+    "category": "User Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill invalid_user into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill invalid_password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an authentication error message is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user is not on the dashboard"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC019",
+    "title": "Theme selection persists when navigating from dashboard to projects",
+    "description": "Verifies that after switching to dark mode on the dashboard, navigating to the projects view keeps the app in dark mode.",
+    "category": "Dark Mode Toggle",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button in the header"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to the projects view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page is displayed in dark mode"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC020",
+    "title": "Theme selection persists after refresh on a protected route",
+    "description": "Verifies that after switching to dark mode, reloading the page on a protected route retains the selected theme.",
+    "category": "Dark Mode Toggle",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button in the header"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to the projects view"
+      },
+      {
+        "type": "action",
+        "description": "Refresh the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page is displayed in dark mode"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC021",
+    "title": "Toggle password visibility",
+    "description": "Verifies the user can toggle the password field visibility to confirm what they typed.",
+    "category": "User Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill some_password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Toggle password visibility"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the password is displayed visibly in the password field"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC022",
+    "title": "Theme selection persists when navigating to data entry",
+    "description": "Verifies that dark mode remains enabled when the user moves from the dashboard to the data entry view.",
+    "category": "Dark Mode Toggle",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button in the header"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to the data entry view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page is displayed in dark mode"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC023",
+    "title": "Theme selection persists when navigating to weightings table",
+    "description": "Verifies that dark mode remains enabled when the user navigates from the dashboard to the weightings view.",
+    "category": "Dark Mode Toggle",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signin"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_USER}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill {{LOGIN_PASSWORD}} into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button in the header"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation link to the weightings view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page is displayed in dark mode"
+      }
+    ],
+    "priority": "Low"
+  }
+]

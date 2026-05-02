@@ -1,49 +1,34 @@
 import { useState } from "react";
 import PageMeta from "../components/common/PageMeta";
 import { ChevronDownIcon } from "../icons";
-import { useBSCData, type Project } from "../context/DataContext";
+import { usePerspectives } from "../hooks/usePerspectives";
+import type { Perspective, Project } from "../types/bsc";
+import { getPerspectiveColors, getProgressColor } from "../utils/perspectiveColors";
 
-// ─── Color palette for strategic lines ──────────────────────────────────────
-const LINE_COLORS = [
-  { border: "border-l-blue-500",     bg: "bg-blue-500/10",    text: "text-blue-600 dark:text-blue-400",    badge: "bg-blue-500/15 text-blue-700 dark:text-blue-300" },
-  { border: "border-l-violet-500",   bg: "bg-violet-500/10",  text: "text-violet-600 dark:text-violet-400", badge: "bg-violet-500/15 text-violet-700 dark:text-violet-300" },
-  { border: "border-l-emerald-500",  bg: "bg-emerald-500/10", text: "text-emerald-600 dark:text-emerald-400",badge: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
-  { border: "border-l-teal-500",     bg: "bg-teal-500/10",    text: "text-teal-600 dark:text-teal-400",    badge: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
-  { border: "border-l-indigo-500",   bg: "bg-indigo-500/10",  text: "text-indigo-600 dark:text-indigo-400", badge: "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300" },
-  { border: "border-l-cyan-500",     bg: "bg-cyan-500/10",    text: "text-cyan-600 dark:text-cyan-400",    badge: "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300" },
-  { border: "border-l-orange-500",   bg: "bg-orange-500/10",  text: "text-orange-600 dark:text-orange-400", badge: "bg-orange-500/15 text-orange-700 dark:text-orange-300" },
-  { border: "border-l-rose-500",     bg: "bg-rose-500/10",    text: "text-rose-600 dark:text-rose-400",    badge: "bg-rose-500/15 text-rose-700 dark:text-rose-300" },
-  { border: "border-l-amber-500",    bg: "bg-amber-500/10",   text: "text-amber-600 dark:text-amber-400",  badge: "bg-amber-500/15 text-amber-700 dark:text-amber-300" },
-  { border: "border-l-green-500",    bg: "bg-green-500/10",   text: "text-green-600 dark:text-green-400",  badge: "bg-green-500/15 text-green-700 dark:text-green-300" },
-];
-
-// ─── Weight badge ────────────────────────────────────────────────────────────
-function WeightBadge({ value, colorClass }: { value: number; colorClass: string }) {
+function WeightBadge({ value, perspectiveId }: { value: number; perspectiveId: string }) {
+  const pColors = getPerspectiveColors(perspectiveId);
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${colorClass}`}>
+    <span className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-bold ${pColors.badge}`}>
       {value}%
     </span>
   );
 }
 
-// ─── Cell value helper (renders "-" as muted) ────────────────────────────────
 function Cell({ value }: { value: string }) {
   if (!value || value === "-") {
-    return <span className="text-gray-400 dark:text-gray-600 italic text-xs">—</span>;
+    return <span className="text-gray-300 dark:text-gray-600 italic">—</span>;
   }
   return <span>{value}</span>;
 }
 
-// ─── Project sub-section ─────────────────────────────────────────────────────
-function ProjectSection({ project, color }: { project: Project; color: typeof LINE_COLORS[0] }) {
+function ProjectSection({ project, perspectiveId }: { project: Project; perspectiveId: string }) {
   const [open, setOpen] = useState(true);
 
   return (
     <div className="mt-2">
-      {/* Project header row */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group text-left"
+        className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg bg-gray-50 dark:bg-gray-800/60 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group text-left"
       >
         <ChevronDownIcon
           className={`w-4 h-4 shrink-0 text-gray-400 transition-transform duration-200 ${open ? "" : "-rotate-90"}`}
@@ -51,48 +36,49 @@ function ProjectSection({ project, color }: { project: Project; color: typeof LI
         <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 flex-1">
           {project.name}
         </span>
-        <WeightBadge value={project.weightage} colorClass={color.badge} />
-        <span className="text-xs text-gray-400 dark:text-gray-500 ml-1">ponderación</span>
+        <WeightBadge value={project.weightage} perspectiveId={perspectiveId} />
       </button>
 
-      {/* Activities table */}
       {open && (
-        <div className="mt-1 overflow-x-auto rounded-xl border border-gray-100 dark:border-gray-800">
+        <div className="mt-2 overflow-x-auto rounded-lg border border-gray-100 dark:border-gray-800/80">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 dark:bg-gray-800/60 text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
-                <th className="text-left px-4 py-2 w-[40%]">Actividad</th>
-                <th className="text-center px-3 py-2 w-[10%]">Pond.</th>
-                <th className="text-center px-3 py-2 w-[10%]">Avance</th>
-                <th className="text-left px-3 py-2 w-[20%]">Responsable</th>
-                <th className="text-left px-3 py-2 w-[20%]">Cumplimiento</th>
+              <tr className="bg-gray-50/80 dark:bg-gray-800/40 text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+                <th className="text-left px-4 py-2.5 w-[40%]">Actividad</th>
+                <th className="text-center px-3 py-2.5 w-[10%]">Pond.</th>
+                <th className="text-center px-3 py-2.5 w-[10%]">Avance</th>
+                <th className="text-left px-3 py-2.5 w-[20%]">Responsable</th>
+                <th className="text-left px-3 py-2.5 w-[20%]">Cumplimiento</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-              {project.activities.map((activity, idx) => (
-                <tr
-                  key={idx}
-                  className="bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
-                >
-                  <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-medium leading-snug">
-                    {activity.name}
-                  </td>
-                  <td className="px-3 py-3 text-center">
-                    <WeightBadge value={activity.weightage} colorClass={color.badge} />
-                  </td>
-                  <td className="px-3 py-3 text-center">
-                    <span className="inline-flex items-center rounded-full bg-green-500/15 px-2 py-0.5 text-xs font-semibold text-green-700 dark:text-green-300">
-                      {activity.progress.toFixed(2)}%
-                    </span>
-                  </td>
-                  <td className="px-3 py-3 text-gray-600 dark:text-gray-400 leading-snug">
-                    <Cell value={activity.responsibleProcess} />
-                  </td>
-                  <td className="px-3 py-3 text-gray-600 dark:text-gray-400 leading-snug">
-                    <Cell value={activity.complianceDate} />
-                  </td>
-                </tr>
-              ))}
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-800/80">
+              {project.activities.map((activity, idx) => {
+                const progressColor = getProgressColor(activity.progress);
+                return (
+                  <tr
+                    key={idx}
+                    className="bg-white dark:bg-gray-900 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors"
+                  >
+                    <td className="px-4 py-3 text-gray-800 dark:text-gray-200 font-medium leading-snug">
+                      {activity.name}
+                    </td>
+                    <td className="px-3 py-3 text-center">
+                      <WeightBadge value={activity.weightage} perspectiveId={perspectiveId} />
+                    </td>
+                    <td className="px-3 py-3 text-center">
+                      <span className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-semibold ${progressColor.badge}`}>
+                        {activity.progress.toFixed(2)}%
+                      </span>
+                    </td>
+                    <td className="px-3 py-3 text-gray-500 dark:text-gray-400 leading-snug text-xs">
+                      <Cell value={activity.responsibleProcess} />
+                    </td>
+                    <td className="px-3 py-3 text-gray-500 dark:text-gray-400 leading-snug text-xs">
+                      <Cell value={activity.complianceDate} />
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -101,53 +87,59 @@ function ProjectSection({ project, color }: { project: Project; color: typeof LI
   );
 }
 
-// ─── Strategic line section ──────────────────────────────────────────────────
-function LineSection({ line, colorIdx }: { line: any; colorIdx: number }) {
+function LineSection({ line }: { line: Perspective }) {
   const [open, setOpen] = useState(true);
-  const color = LINE_COLORS[colorIdx % LINE_COLORS.length];
-  const totalActivities = line.projects.reduce((a: number, p: any) => a + p.activities.length, 0);
+  const pColors = getPerspectiveColors(line.id);
+  const totalActivities = line.projects.reduce((a: number, p) => a + p.activities.length, 0);
 
   return (
-    <div className={`rounded-2xl border border-gray-200 dark:border-gray-700 border-l-4 ${color.border} bg-white dark:bg-gray-900 shadow-sm overflow-hidden`}>
-      {/* Line header */}
+    <div className="rounded-xl overflow-hidden border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900">
+      <div className={`h-1 ${pColors.bar}`} />
       <button
         onClick={() => setOpen(!open)}
-        className={`w-full flex items-center gap-3 px-5 py-4 ${color.bg} hover:opacity-90 transition-opacity group text-left`}
+        className={`w-full flex items-center gap-3 px-5 py-4 ${pColors.accentBg} ${pColors.accentBgDark} hover:opacity-90 transition-opacity group text-left`}
       >
         <ChevronDownIcon
-          className={`w-5 h-5 shrink-0 ${color.text} transition-transform duration-300 ${open ? "" : "-rotate-90"}`}
+          className={`w-5 h-5 shrink-0 ${pColors.accentText} ${pColors.accentTextDark} transition-transform duration-300 ${open ? "" : "-rotate-90"}`}
         />
         <div className="flex-1 min-w-0">
-          <h3 className={`text-base font-bold ${color.text} leading-snug`}>
+          <h3 className={`text-sm font-bold ${pColors.accentText} ${pColors.accentTextDark} leading-snug`}>
             {line.name}
           </h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+          <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">
             {line.projects.length} proyecto{line.projects.length !== 1 ? "s" : ""} · {totalActivities} actividades
           </p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <WeightBadge value={line.weightage} colorClass={color.badge} />
-          <span className="text-xs text-gray-400 dark:text-gray-500">del BSC</span>
+          <WeightBadge value={line.weightage} perspectiveId={line.id} />
         </div>
       </button>
 
-      {/* Projects */}
-      <div className={`transition-all duration-500 overflow-hidden ${open ? "max-h-[9999px] opacity-100" : "max-h-0 opacity-0"}`}>
-        <div className="px-4 pb-4 flex flex-col gap-2 pt-2">
-          {line.projects.map((project: any) => (
-            <ProjectSection key={project.id} project={project} color={color} />
-          ))}
+      <div className={`grid transition-all duration-500 ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+        <div className="overflow-hidden">
+          <div className="px-4 pb-4 flex flex-col gap-1 pt-1">
+            {line.projects.map((project) => (
+              <ProjectSection key={project.id} project={project} perspectiveId={line.id} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-// ─── Page ────────────────────────────────────────────────────────────────────
 export default function WeightingsPage() {
-  const { data } = useBSCData();
+  const { data, isLoading, error } = usePerspectives();
 
-  if (!data) {
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-brand-500 border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (error || !data) {
     return <div className="p-8 text-center text-red-500">Error cargando datos</div>;
   }
 
@@ -168,41 +160,18 @@ export default function WeightingsPage() {
       />
 
       <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-        {/* Page header */}
-        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="text-title-md2 font-semibold text-black dark:text-white">
-              Tabla de Ponderaciones
-            </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-              Jerarquía: Perspectiva → Proyecto → Actividad
-            </p>
-          </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+        <div className="mb-8">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            Tabla de Ponderaciones
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             {data.perspectives.length} perspectivas · {totalProjects} proyectos · {totalActivities} actividades
           </p>
         </div>
 
-        {/* Legend */}
-        <div className="mb-6 flex flex-wrap gap-4 text-xs text-gray-500 dark:text-gray-400">
-          <span className="flex items-center gap-1.5">
-            <span className="inline-block w-3 h-3 rounded-full bg-blue-500 opacity-70" />
-            Ponderación de perspectiva = % sobre el BSC total
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="inline-block w-3 h-3 rounded-full bg-gray-400 opacity-70" />
-            Ponderación de proyecto = % dentro de su perspectiva
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="inline-block w-3 h-3 rounded-full bg-gray-300 opacity-70" />
-            Ponderación de actividad = % dentro de su proyecto
-          </span>
-        </div>
-
-        {/* Strategic lines */}
         <div className="flex flex-col gap-5">
-          {data.perspectives.map((line, idx) => (
-            <LineSection key={line.id} line={line} colorIdx={idx} />
+          {data.perspectives.map((line) => (
+            <LineSection key={line.id} line={line} />
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import { Link } from "react-router";
+import { getPerspectiveColors, getProgressColor } from "../../utils/perspectiveColors";
 
 interface ComponentItem {
   name: string;
@@ -9,73 +10,83 @@ interface StrategicCardProps {
   name: string;
   progress: number;
   components: ComponentItem[];
+  perspectiveId: string;
+  weightage: number;
+  objective?: string;
 }
 
-function getProgressColors(progress: number) {
-  if (progress >= 80) {
-    return {
-      badge: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-      bar: "bg-emerald-500",
-      pct: "text-emerald-600 dark:text-emerald-400",
-    };
-  }
-  else if (progress >= 50){
-    return {
-      badge: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-      bar: "bg-amber-500",
-      pct: "text-amber-600 dark:text-amber-400",
-    }
-  }
-  return {
-    badge: "bg-red-500/10 text-red-600 dark:text-red-400",
-    bar: "bg-red-500",
-    pct: "text-red-600 dark:text-red-400",
-  };
-}
-
-export default function StrategicCard({ name, progress, components }: StrategicCardProps) {
-  const colors = getProgressColors(progress);
+export default function StrategicCard({
+  name,
+  progress,
+  components,
+  perspectiveId,
+  weightage,
+  objective,
+}: StrategicCardProps) {
+  const pColors = getPerspectiveColors(perspectiveId);
+  const pProgress = getProgressColor(progress);
 
   return (
-    <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col h-full hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
-        <h3 className="text-xl font-bold text-black dark:text-white leading-snug">
-          {name}
-        </h3>
-        <div className={`flex items-center justify-center rounded-full px-4 py-1.5 font-bold text-lg ${colors.badge}`}>
-          {progress}%
+    <div className="group relative rounded-xl overflow-hidden border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900 flex flex-col h-full transition-shadow duration-300 hover:shadow-lg">
+      <div className={`h-1.5 w-full ${pColors.bar}`} />
+      <div className="p-5 flex flex-col flex-1">
+        <div className="flex items-start justify-between gap-3 mb-1">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <span className={`inline-flex items-center rounded px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${pColors.accentBg} ${pColors.accentBgDark} ${pColors.accentText} ${pColors.accentTextDark}`}>
+                {weightage}% del BSC
+              </span>
+            </div>
+            <h3 className="text-base font-bold text-gray-900 dark:text-white leading-snug truncate">
+              {name}
+            </h3>
+            {objective && (
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">
+                {objective}
+              </p>
+            )}
+          </div>
+          <div className={`shrink-0 flex items-center justify-center rounded-lg px-3 py-1.5 ${pProgress.bg} ${pProgress.text}`}>
+            <span className="text-2xl font-bold tabular-nums tracking-tight">
+              {progress}
+            </span>
+            <span className="text-xs font-semibold ml-0.5 opacity-70">%</span>
+          </div>
         </div>
-      </div>
 
-      {/* Component list */}
-      <div className="flex-1">
-        <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-          Componentes
-        </h4>
-        <ul className="space-y-3">
-          {components.map((comp, idx) => {
-            const c = getProgressColors(comp.progress);
-            return (
-              <li key={idx} className="flex flex-col bg-gray-50 dark:bg-gray-800 rounded-xl p-3">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-black dark:text-white leading-snug">
-                    {comp.name}
-                  </span>
-                  <span className={`ml-3 shrink-0 text-xs font-bold ${c.pct}`}>
-                    {comp.progress}%
-                  </span>
-                </div>
-                <div className="w-full rounded-full bg-gray-200 dark:bg-gray-700 h-2">
-                  <div
-                    className={`${c.bar} h-2 rounded-full transition-all duration-700`}
-                    style={{ width: `${comp.progress}%` }}
-                  />
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="flex-1 mt-4">
+          <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+            Proyectos
+          </p>
+          <ul className="space-y-2">
+            {components.map((comp, idx) => {
+              const c = getProgressColor(comp.progress);
+              return (
+                <li key={idx}>
+                  <Link
+                    to={`/proyectos?expand=${perspectiveId}`}
+                    className="group/item block rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 -mx-2 px-2 py-1 transition-colors"
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm text-gray-700 dark:text-gray-300 group-hover/item:text-brand-600 dark:group-hover/item:text-brand-400 truncate mr-2 transition-colors">
+                        {comp.name}
+                      </span>
+                      <span className={`shrink-0 text-xs font-semibold tabular-nums ${c.text}`}>
+                        {comp.progress}%
+                      </span>
+                    </div>
+                    <div className="w-full rounded-full bg-gray-100 dark:bg-gray-800 h-1.5">
+                      <div
+                        className={`${c.bar} h-1.5 rounded-full transition-all duration-700 ease-out`}
+                        style={{ width: `${comp.progress}%` }}
+                      />
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );

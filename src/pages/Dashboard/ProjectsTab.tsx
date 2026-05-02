@@ -1,56 +1,75 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Link, useSearchParams } from "react-router";
 import ComponentProjectsCard from "../../components/Cards/ComponentProjectsCard";
 import PageMeta from "../../components/common/PageMeta";
 import { ChevronDownIcon } from "../../icons";
-import { useBSCData, type Perspective } from "../../context/DataContext";
+import { usePerspectives } from "../../hooks/usePerspectives";
+import type { Perspective } from "../../types/bsc";
+import { getPerspectiveColors } from "../../utils/perspectiveColors";
 
-// Internal component to manage each perspective's expanded state
-const PerspectiveSection = ({ perspective }: { perspective: Perspective }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
+const PerspectiveSection = ({ perspective, defaultExpanded = true }: { perspective: Perspective; defaultExpanded?: boolean }) => {
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const pColors = getPerspectiveColors(perspective.id);
 
-  const totalProjects = perspective.projects.reduce(
+  const totalActivities = perspective.projects.reduce(
     (acc: number, p) => acc + p.activities.length,
     0
   );
 
-  return (
-    <div className="flex flex-col gap-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-4 shadow-sm">
-      {/* Collapsible header */}
-      <div
-        className="flex items-start gap-2 border-b-2 border-primary/20 pb-3 cursor-pointer group"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <div
-          className={`mt-1 shrink-0 transition-transform duration-300 text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 ${
-            isExpanded ? "" : "-rotate-90"
-          }`}
-        >
-          <ChevronDownIcon className="w-6 h-6" />
-        </div>
-        <h3 className="text-xl font-bold text-black dark:text-white select-none group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
-          {perspective.name}
-        </h3>
-        {/* Badge */}
-        <span className="ml-auto shrink-0 mt-0.5 inline-flex items-center rounded-full bg-blue-500/10 px-2.5 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
-          {perspective.projects.length} proyecto{perspective.projects.length !== 1 ? "s" : ""} · {totalProjects} actividad{totalProjects !== 1 ? "es" : ""}
-        </span>
-      </div>
+  useEffect(() => {
+    if (defaultExpanded && sectionRef.current) {
+      const timeout = setTimeout(() => {
+        sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [defaultExpanded]);
 
-      {/* Cards (collapsible) */}
+  return (
+    <div ref={sectionRef} id={`perspective-${perspective.id}`} className="rounded-xl overflow-hidden border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900">
+      <div className={`h-1 ${pColors.bar}`} />
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full flex items-center gap-3 px-5 py-4 text-left group hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+      >
+        <div className={`mt-0.5 shrink-0 transition-transform duration-300 ${pColors.accentText} ${pColors.accentTextDark} ${isExpanded ? "" : "-rotate-90"}`}>
+          <ChevronDownIcon className="w-5 h-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className={`text-base font-bold ${pColors.accentText} ${pColors.accentTextDark} leading-snug`}>
+            {perspective.name}
+          </h3>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+            {perspective.projects.length} proyecto{perspective.projects.length !== 1 ? "s" : ""} · {totalActivities} actividad{totalActivities !== 1 ? "es" : ""}
+          </p>
+        </div>
+        <span className={`shrink-0 inline-flex items-center rounded-md px-2.5 py-1 text-xs font-semibold ${pColors.badge}`}>
+          {perspective.weightage}% del BSC
+        </span>
+      </button>
+
       <div
-        className={`transition-all duration-500 overflow-hidden ${
-          isExpanded ? "opacity-100 max-h-[5000px] mt-2" : "opacity-0 max-h-0"
+        className={`grid transition-all duration-500 ${
+          isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="flex flex-wrap gap-4 items-stretch">
-          {perspective.projects.map((project, idx) => (
-            <div key={idx} className="w-fit max-w-full">
-              <ComponentProjectsCard
-                name={project.name}
-                projects={project.activities}
-              />
-            </div>
-          ))}
+        <div className="overflow-hidden">
+          <div className="px-5 pb-5 grid grid-cols-1 xl:grid-cols-2 gap-4">
+            {perspective.projects.map((project) => (
+              <Link
+                key={project.id}
+                to={`/acciones?expand=${project.id}`}
+                className="block transition-shadow duration-200 hover:shadow-md rounded-xl"
+              >
+                <ComponentProjectsCard
+                  name={project.name}
+                  projects={project.activities}
+                  perspectiveId={perspective.id}
+                />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -58,13 +77,23 @@ const PerspectiveSection = ({ perspective }: { perspective: Perspective }) => {
 };
 
 export default function ProjectsTab() {
-  const { data } = useBSCData();
+  const { data, isLoading, error } = usePerspectives();
+  const [searchParams] = useSearchParams();
+  const expandId = searchParams.get("expand");
 
-  if (!data) {
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-brand-500 border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (error || !data) {
     return <div className="p-8 text-center text-red-500">Error cargando datos</div>;
   }
 
-  const totalProjects = data.perspectives.reduce(
+  const totalActivities = data.perspectives.reduce(
     (acc, p) => acc + p.projects.reduce((a, proj) => a + proj.activities.length, 0),
     0
   );
@@ -73,22 +102,26 @@ export default function ProjectsTab() {
     <>
       <PageMeta
         title="Proyectos | Balanced Scorecard"
-        description="Panel de control de proyectos por líneas estratégicas"
+        description="Panel de control de proyectos por perspectivas"
       />
 
       <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-title-md2 font-semibold text-black dark:text-white">
-            Proyectos por Línea Estratégica
+        <div className="mb-8">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            Proyectos por Perspectiva
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {data.perspectives.length} perspectivas · {totalProjects} actividades en total
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            {data.perspectives.length} perspectivas · {totalActivities} actividades en total
           </p>
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
           {data.perspectives.map((perspective) => (
-            <PerspectiveSection key={perspective.id} perspective={perspective} />
+            <PerspectiveSection
+              key={perspective.id}
+              perspective={perspective}
+              defaultExpanded={!expandId || perspective.id === expandId}
+            />
           ))}
         </div>
       </div>

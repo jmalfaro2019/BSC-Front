@@ -1,4 +1,4 @@
-import React from "react";
+
 
 export default function TabsNavigation() {
   return (
@@ -7,7 +7,7 @@ export default function TabsNavigation() {
         <button
           className="border-b-2 border-primary py-2 px-4 text-sm font-medium text-primary hover:text-primary"
         >
-          Líneas Estratégicas
+          Perspectivas
         </button>
         <button
           className="border-b-2 border-transparent py-2 px-4 text-sm font-medium text-body hover:text-primary dark:text-bodydark disabled:opacity-50 disabled:cursor-not-allowed"

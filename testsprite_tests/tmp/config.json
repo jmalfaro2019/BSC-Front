@@ -1,0 +1,43 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5173",
+  "loginUser": "admin",
+  "loginPassword": "admin123",
+  "executionArgs": {
+    "projectName": "FRONT",
+    "projectPath": "C:\\Users\\alfar\\OneDrive\\Escritorio\\TRABAJO\\DINAMIZAR\\BSC\\development\\FRONT",
+    "testIds": [
+      "TC001",
+      "TC002",
+      "TC003",
+      "TC004",
+      "TC005",
+      "TC006",
+      "TC007",
+      "TC008",
+      "TC009",
+      "TC010",
+      "TC011",
+      "TC012",
+      "TC013",
+      "TC014",
+      "TC015",
+      "TC016",
+      "TC017",
+      "TC018",
+      "TC019",
+      "TC020",
+      "TC021",
+      "TC022",
+      "TC023"
+    ],
+    "additionalInstruction": "Login credentials: username=admin, password=admin123. Frontend runs on http://localhost:5173. API server runs on http://localhost:3000. Vite dev server proxies /api to localhost:3000. Execute all test cases from the existing test plan.",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-5YfTVzeQCQ_I6yTWMWuzf96F2bGCwXyOlT_wH8vMm4k_9FtngGs_nc6ava5Ia1xhjydc68Wn2V11CCpIbuVYsLLmBuWWAMJeiGLdjRuFL20BfmeXBEj_Gr_FY2fN_B4F0mk"
+    }
+  },
+  "serverPort": 52125
+}

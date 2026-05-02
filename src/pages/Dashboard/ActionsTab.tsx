@@ -1,61 +1,75 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router";
 import ActionCard from "../../components/Cards/ActionCard";
 import PageMeta from "../../components/common/PageMeta";
 import { ChevronDownIcon } from "../../icons";
-import { useBSCData, type Project } from "../../context/DataContext";
+import { usePerspectives } from "../../hooks/usePerspectives";
+import type { Project } from "../../types/bsc";
+import { getPerspectiveColors } from "../../utils/perspectiveColors";
 
-// Internal component to manage each project section's expanded state
 const ProjectSection = ({
   project,
+  perspectiveId,
   perspectiveName,
+  defaultExpanded = true,
 }: {
   project: Project;
+  perspectiveId: string;
   perspectiveName: string;
+  defaultExpanded?: boolean;
 }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const pColors = getPerspectiveColors(perspectiveId);
+
+  useEffect(() => {
+    if (defaultExpanded && sectionRef.current) {
+      const timeout = setTimeout(() => {
+        sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [defaultExpanded]);
 
   return (
-    <div className="flex flex-col gap-4 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-4 shadow-sm">
-      {/* Collapsible Header */}
-      <div
-        className="flex items-start gap-2 border-b-2 border-primary/20 pb-3 cursor-pointer group"
+    <div ref={sectionRef} id={`project-${project.id}`} className="rounded-xl overflow-hidden border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900">
+      <div className={`h-1 ${pColors.bar}`} />
+      <button
         onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full flex items-center gap-3 px-5 py-4 text-left group hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
       >
-        <div
-          className={`mt-1 shrink-0 transition-transform duration-300 text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 ${
-            isExpanded ? "" : "-rotate-90"
-          }`}
-        >
-          <ChevronDownIcon className="w-6 h-6" />
+        <div className={`shrink-0 transition-transform duration-300 ${pColors.accentText} ${pColors.accentTextDark} ${isExpanded ? "" : "-rotate-90"}`}>
+          <ChevronDownIcon className="w-5 h-5" />
         </div>
-        <div className="flex flex-col">
-          <h3 className="text-xl font-bold text-black dark:text-white select-none group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+        <div className="flex-1 min-w-0">
+          <h3 className={`text-base font-bold ${pColors.accentText} ${pColors.accentTextDark} leading-snug`}>
             {project.name}
           </h3>
-          <span className="text-xs font-medium text-gray-400 dark:text-gray-500 mt-0.5">
+          <span className="text-xs text-gray-400 dark:text-gray-500">
             {perspectiveName}
           </span>
         </div>
-        {/* Activity count badge */}
-        <span className="ml-auto shrink-0 mt-0.5 inline-flex items-center rounded-full bg-blue-500/10 px-2.5 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
+        <span className={`shrink-0 inline-flex items-center rounded-md px-2.5 py-1 text-xs font-semibold ${pColors.badge}`}>
           {project.activities.length} actividad{project.activities.length !== 1 ? "es" : ""}
         </span>
-      </div>
+      </button>
 
-      {/* Cards grid (collapsible) */}
       <div
-        className={`transition-all duration-500 overflow-hidden ${
-          isExpanded ? "opacity-100 max-h-[5000px] mt-1" : "opacity-0 max-h-0"
+        className={`grid transition-all duration-500 ${
+          isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="flex flex-wrap gap-4">
-          {project.activities.map((activity, idx) => (
-            <ActionCard
-              key={idx}
-              name={activity.name}
-              progress={activity.progress}
-            />
-          ))}
+        <div className="overflow-hidden">
+          <div className="px-5 pb-5 flex flex-wrap gap-4">
+            {project.activities.map((activity, idx) => (
+              <ActionCard
+                key={idx}
+                name={activity.name}
+                progress={activity.progress}
+                perspectiveId={perspectiveId}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -63,16 +77,26 @@ const ProjectSection = ({
 };
 
 export default function ActionsTab() {
-  const { data } = useBSCData();
+  const { data, isLoading, error } = usePerspectives();
+  const [searchParams] = useSearchParams();
+  const expandId = searchParams.get("expand");
 
-  if (!data) {
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-brand-500 border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (error || !data) {
     return <div className="p-8 text-center text-red-500">Error cargando datos</div>;
   }
 
-  // Flatten all projects with their perspective info
   const allProjects = data.perspectives.flatMap((perspective) =>
     perspective.projects.map((project) => ({
       project,
+      perspectiveId: perspective.id,
       perspectiveName: perspective.name,
     }))
   );
@@ -85,26 +109,28 @@ export default function ActionsTab() {
   return (
     <>
       <PageMeta
-        title="Acciones | Balanced Scorecard"
-        description="Panel de control de acciones por proyecto"
+        title="Actividades | Balanced Scorecard"
+        description="Panel de control de actividades por proyecto"
       />
 
       <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-title-md2 font-semibold text-black dark:text-white">
-            Acciones por Proyecto
+        <div className="mb-8">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            Actividades por Proyecto
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             {allProjects.length} proyectos · {totalActivities} actividades en total
           </p>
         </div>
 
-        <div className="flex flex-col gap-6">
-          {allProjects.map(({ project, perspectiveName }) => (
+        <div className="flex flex-col gap-5">
+          {allProjects.map(({ project, perspectiveId, perspectiveName }) => (
             <ProjectSection
               key={project.id}
               project={project}
+              perspectiveId={perspectiveId}
               perspectiveName={perspectiveName}
+              defaultExpanded={!expandId || project.id === expandId}
             />
           ))}
         </div>
