@@ -114,3 +114,12 @@ export async function deleteActivity(
     `${PERSPECTIVES_KEY}/${perspectiveId}/projects/${projectId}/activities/${activityId}`,
   );
 }
+
+export async function batchUpdateProgress(
+  updates: { activityId: string; progress: number }[],
+): Promise<{ updated: Activity[] }> {
+  const { data } = await api.patch(`${PERSPECTIVES_KEY}/batch-progress`, {
+    updates,
+  });
+  return data;
+}
